@@ -6,10 +6,10 @@
 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
 
 示例 1：
-~~~
+```
 输入：s = "We are happy."
 输出："We%20are%20happy."
-~~~
+```
 
 限制：
 
@@ -20,13 +20,12 @@
 
 思路：
 
-  
 * 遍历字符串,把非' '添加到返回值,否则添加"%20"
 
 时间复杂度：O(n)  遍历一遍  
 空间复杂度：O(n)
 
-~~~cpp
+```cpp
 class Solution {
 public:
     string replaceSpace(string s) {
@@ -39,16 +38,17 @@ public:
         return re;
     }
 };
-~~~
+```
 
 
 * 遍历整个字符串，当字符为' '时替换为"%20"
+
 切割字符串 strsub(0 - spaceIndex-1) + "%20" + strsub(spaceIndex+1 - len)
 
 时间复杂度：O(n)  遍历一遍  
 空间复杂度：O(n)
 
-~~~cpp
+```cpp
 class Solution {
 public:
     string replaceSpace(string s) {
@@ -61,14 +61,14 @@ public:
         return s;
     }
 };
-~~~
+```
 
 * 双指针--->字符串原地修改，实际上就是吧字符串容量扩大，然后循环
 
 时间复杂度：O(n)  遍历一遍  
 空间复杂度：O(1) 
 
-~~~cpp
+```cpp
 class Solution {
 public:
     string replaceSpace(string s) {
@@ -93,5 +93,5 @@ public:
         return s;
     }
 };
-~~~
+```
 

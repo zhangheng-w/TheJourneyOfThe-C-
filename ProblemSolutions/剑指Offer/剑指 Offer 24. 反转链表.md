@@ -7,10 +7,10 @@
 
  
 示例:
-~~~
+```
 输入: 1->2->3->4->5->NULL
 输出: 5->4->3->2->1->NULL
-~~~
+```
 
 限制：
 
@@ -21,14 +21,14 @@
 
 思路：
 
-双指针+头插法+迭代
+* 双指针+头插法+迭代
 
 head->null  ->  head->1->null ->  head->2->1->null
 
 时间复杂度：O(n)  
 空间复杂度：O(1)
 
-~~~cpp
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -51,14 +51,14 @@ public:
         return re->next;
     }
 };
-~~~
+```
 
-递归+尾插法
+* 递归+尾插法
 
 时间复杂度：O(n)，其中n是链表的长度。需要对链表的每个节点进行反转操作。  
 空间复杂度：O(n)，其中n是链表的长度。空间复杂度主要取决于递归调用的栈空间，最多为n层。
 
-~~~cpp
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -80,5 +80,5 @@ public:
         return re;
     }
 };
-~~~
+```
 

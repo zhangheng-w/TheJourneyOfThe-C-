@@ -8,20 +8,20 @@
 
 示例 1：
 
-~~~
+```
 输入：
 ["CQueue","appendTail","deleteHead","deleteHead"]
 [[],[3],[],[]]
 输出：[null,null,3,-1]
-~~~
+```
 
 示例 2：
-~~~
+```
 输入：
 ["CQueue","deleteHead","appendTail","appendTail","deleteHead","deleteHead"]
 [[],[],[5],[2],[],[]]
 输出：[null,-1,null,null,5,2]
-~~~
+```
 
 提示：
 
@@ -38,7 +38,7 @@
 
 当deleteStack == null  insertStack的所有元素进入deleteStack
 
-~~~cpp
+```cpp
 class CQueue {
 public:
     CQueue() {
@@ -73,4 +73,4 @@ private:
  * obj->appendTail(value);
  * int param_2 = obj->deleteHead();
  */
-~~~
+```
