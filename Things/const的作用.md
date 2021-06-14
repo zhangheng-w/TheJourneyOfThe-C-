@@ -92,4 +92,3 @@ private:
     std::string text;
 };
 ~~~
-
