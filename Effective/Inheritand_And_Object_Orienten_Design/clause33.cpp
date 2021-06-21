@@ -1,5 +1,6 @@
 /*
  * Created by he on 2021/2/5.
+ * 33.避免遮掩继承而来的名称
  *
  * 1、Derived class类的名称会遮掩 Base class内的名称。 在 public 继承下从来没有人希望如此
  * 2、为了让被遮掩的名称重见天日，可使用 using 声明式或转交函数
