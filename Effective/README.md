@@ -60,7 +60,7 @@
 
 
 ### 第一章 让自己习惯C++	
-#### <span id="clause1">1、视**C++**为一个语言联邦 </span>
+#### <span id="clause1">1、视**C++** 为一个语言联邦 </span>
 总结来说分为四个部分
 * c，说到底c++仍是以c为基础。区块(blocks)、语句(statements)、预处理(preprocessor)、内置数据类型(built-in data types)、数组(arrays)、指针(pointers)等
 * Object-Oriented C++。这部分也就是C With Classes所诉求： classes(包括构造函数和析构函数)、封装(encapsulation)、继承(inheritance)、多态(polymorphism)、virtual函数(动态绑定)等
@@ -85,7 +85,7 @@ const关键字出现在星号左边，表示指被指物是常量；如果出现
 * 为免除"跨编译单元之初始化次序"问题，请以local static对象替换non-local static对象
 
 ### 第二章 构造/析构/赋值运算	
-#### <span id="clause5">5、了解**C++**默默编写并调用哪些函数 </span>
+#### <span id="clause5">5、了解**C++** 默默编写并调用哪些函数 </span>
 * 编译器可以暗自为class创建default构造函数、copy构造函数、析构函数、copy assignment操作符
  
 #### <span id="clause6">6、若不想使用编译器自动生成的函数，就该明确拒绝 </span>
@@ -105,7 +105,7 @@ const关键字出现在星号左边，表示指被指物是常量；如果出现
 #### <span id="clause10">10、令**operator=** 返回一个**reference to *this** </span>
 * 令赋值(assignment)操作符返回一个reference to *this
 
-#### <span id="clause11">11、在**operator=**中处理"自我赋值" </span>
+#### <span id="clause11">11、在**operator=** 中处理"自我赋值" </span>
 * 确保当对象自我赋值时operator=有良好行为。其中技术包括比较"来源对象"和"目标对象"的地址、精心周到的语句顺序、以及copy-and-swap
 * 确定任何函数如果操作一个以上的对象，而其中多个对象是同一个对象时，其行为仍然正确
 
@@ -277,5 +277,53 @@ c风格的转型动作
 * 多重继承比单一继承复杂。它可能导致新的歧义性，以及对virtual继承的需要。
 * virtual继承会增加大小、速度、初始化(及赋值)复杂度等等成本。如果virtual base class不带任何数据，将是最具有实用价值的情况
 * 多重继承的确有正当用途。其中一个情节涉及"public继承某个Interface class"和"private继承某个协助实现的class"的两相结合
+
+### 第七章 模版和泛型编程 
+#### <span id="clause41">41、了解隐式接口和编译期多态 </span>
+* class和template都支持接口(interface)和多态(polymorphism)
+* 对class而言接口是显式(explicit),以函数签名为中心。多态则是通过virtual函数发生于运行期
+* 对template参数而言，接口是隐式的，奠基于有效的表达式，多态则是通过template具体化和函数重载解析发生于编译器
+
+#### <span id="clause42">42、了解**typename**的双重意义 </span>
+* 声明template参数时，关键字class和typename可以互换
+* 请使用关键字typename标识嵌套从属类型名称；但不得在base class lists(基类列)
+* 或member initialization list(成员出撕裂)内以它作为base class修饰符
+
+#### <span id="clause43">43. 学习处理模板化基类内的名称 </span>
+* 可在derived class template内通过"this->"指涉base class template内的成员名称，或籍有一个明白写出的"base class资格修饰符"完成
+
+#### <span id="clause44">44. 将与参数无关的代码抽离**template** </span>
+* Template生成的class和多个函数，所以任何template代码都不该与某个构造膨胀的templarte参数产生相依关系
+* 因非类型模版参数而造成的代码膨胀，往往可消除，做法是以函数参数或class成员变量替换template参数
+* 因类型参数而造成的代码膨胀，往往可降低，做法是让带有完全相同二进制表述的具现类型共享实现码
+
+#### <span id="clause45">45. 运用成员函数模版接受所有兼容类型 </span>
+* 请使用member function template(成员模版函数)生成"可接受所有兼容类型"的函数
+* 如果你声明member template用于"泛化copy构造"或"泛化assignment操作"，你还是需要声明正常的泛化copy构造和泛化assignment操作符
+
+#### <span id="clause46">46. 需要类型转换时请为模版定义非成员函数 </span>
+* 当我编写一个class template，而它所提供之"于此template相关的"函数支持"所以参数之隐式类型转换"时，请将那些函数定义为"class template内部的friend函数"
+
+#### <span id="clause47">47. 请使用**traits class**表现类型信息 </span>
+* 迭代器
+* Input迭代器
+* Output迭代器
+* Forward迭代器
+* Bidirectional迭代器 可以向前 还可以向后 set map
+* Random Access迭代器   常量时间内向前或向后跳跃任意位置 vector string
+ 
+
+* 建立一组重载函数(身份像劳工)或函数模版(例如 doAdvance)，彼此间的差异只在于各自的traits参数，令每个函数实现码与其接受traits信息相应和
+* 建立一个控制函数(身份像工头)或函数模版(例如 advance)， 它调用上述的"劳工函数"并传递traits class所提供的信息
+
+
+* Traits class使得"类型相关信息"在编译器可用。它们以template和"template 特化"完成实现
+* 整合重载技术(overloading)后, traits class有可能在编译期对类型执行if...else测试
+
+#### <span id="clause48">48. 认识**template**元编程 </span>
+* Template metaphorgramming(TMP, 模版元编程)可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
+* TMP可被用来生成"基于政策选择组合"的客户端定义代码，也可用避免生成对某些特殊类型并不合适的代码
+
+
 
 #### [返回顶部](#head)
