@@ -1,6 +1,6 @@
 /*
  * Created by weyiua on 2021/6/24.
- *48. 认识template元编程
+ * 48. 认识template元编程
  *
  * * Template metaphorgramming(TMP, 模版元编程)可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
  * * TMP可被用来生成"基于政策选择组合"的客户端定义代码，也可用避免生成对某些特殊类型并不合适的代码

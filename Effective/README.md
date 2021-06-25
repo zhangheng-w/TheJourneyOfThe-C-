@@ -57,7 +57,15 @@
 |  46  | 需要类型转换时请为模版定义非成员函数 | [clause46.cpp](Template_And_Generic_Programming/clause46.cpp) | [jump](#clause46) |
 |  47  | 请使用**traits classes**表现类型信息  | [clause47.cpp](Template_And_Generic_Programming/clause47.cpp) | [jump](#clause47) |
 |  48  | 认识**template**元编程 | [clause48.cpp](Template_And_Generic_Programming/clause48.cpp) | [jump](#clause48) |
-
+| 第八章 定制**new**和**delete** |  | [Customizing_New_And_Delete](Customizing_New_And_Delete) | |
+|  49  | 了解**new-handler**的行为 | [clause49.cpp](Customizing_New_And_Delete/clause49.cpp) | [jump](#clause49) |
+|  50  | 了解**new**和**delete**的合理替换时机 | [clause50.cpp](Customizing_New_And_Delete/clause50.cpp) | [jump](#clause50) |
+|  51  | 编写**new**和**delete**时需固守常规 | [clause51.cpp](Customizing_New_And_Delete/clause51.cpp)| [jump](#clause51) |
+|  52  | 写了**placement new**也要写**placement delete** | [clause52.cpp](Customizing_New_And_Delete/clause52.cpp) | [jump](#clause52) |
+| 第九章 杂项讨论 |  | [Miscellany](Miscellany) | |
+|  53  | 不要轻忽编译器的警告 | [clause53.cpp](Miscellany/clause53.cpp) | [jump](#clause53) |
+|  54  | 在资源管理类中小心**copying**行为 | [clause54.cpp](Miscellany/clause54.cpp) | [jump](#clause54) |
+|  55  | 在资源管理类中提供原始资源的访问 | [clause55.cpp](Miscellany/clause55.cpp) | [jump](#clause55) |
 
 ### 第一章 让自己习惯C++	
 #### <span id="clause1">1、视**C++** 为一个语言联邦 </span>
@@ -324,6 +332,49 @@ c风格的转型动作
 * Template metaphorgramming(TMP, 模版元编程)可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
 * TMP可被用来生成"基于政策选择组合"的客户端定义代码，也可用避免生成对某些特殊类型并不合适的代码
 
+### 第八章 定制**new**和**delete**
+#### <span id="clause49">49. 了解**new-handler**的行为 </span>
+* set_new_handler允许客户指定一个函数，在内存分配无法获得满足时被调用
+* Nothrow new是一个颇为局限的工具，因为它只适用于内存分配；后继的构造函数调用还是可能抛出异常
+
+#### <span id="clause50">50. 了解**new**和**delete**的合理替换时机 </span>
+1. 用来检测运用上的错误
+2. 为了强化效能
+3. 为了收集使用上的统计数据
+
+
+1. 为了检测运用错误
+2. 为了收集动态分配内存之使用统计信息
+3. 为了增加分配和归还的速度
+4. 为了降低缺省内存管理器打起来的空间额外开销
+5. 为了弥补缺省分配器中的非最佳齐位
+6. 为了将相关对象成簇集中
+7. 为了获得非传统的行为
+
+* 有许多的理由需要写个自定的new和delete，包括改善效能、对heap运用错误进行调试、收集heap的使用信息
+
+#### <span id="clause51">51. 编写**new**和**delete**时需固守常规 </span>
+
+* operator new应该内含一个无穷循序，并在其中尝试分配内存，如果它无法满足内存需求，就该调用new-handler。它也应该有能力处理0bytes申请，class专属版本则还应该处理"比正确大小更大的申请"
+* operator delete应该再收到null指针时不做任何事。class专属版本则还应该处理"比正确大小更大申请"
+
+#### <span id="clause52">52. 写了**placement new**也要写**placement delete** </span>
+* 当你写一个placement operator new，请确定也写出了对应的placement operator delete。如果没有这样做，你的程序可能会隐微而时断时续的内存泄漏
+* 当你声明placement new和placement delete,请确定不要无意识的遮掩了它们的正常版本
+
+### 第九章 杂项讨论
+#### <span id="clause53">53. 不要轻忽编译器的警告 </span>
+* 严肃对待编译器发出的警告信息。努力在你的编译器的最高(最严苛)警告级别下争取"无任何警告"的荣耀
+* 不要过度依赖编译器的报警能力，因为不同的编译器对待事物的态度并不相同。一旦移植到另一个编译器上，你原本依赖的警告信息可能消失
+
+#### <span id="clause54">54. 让自己熟悉包括TR1在内的标准程序库 </span>
+* C++标准程序库的主要机能有STL、ioterator、locales组成。并包括C99标准程序库
+* TR1添加了智能指针(例如 tr1::shared_ptr)、一般化函数指针(tr1::function)、hash-based容器、正则表达式以及另外10个组件的支持
+* TR1自身只是一种规范。为获得TR1提供的好处，你需要一份实物。一个好的实物来源是Boost
+
+#### <span id="clause55">55. 让自己熟悉Boost </span>
+* Boost是一个社群，也是一个网站。致力于免费、源码开放、同僚复审的C++程序库开发。Boost在C++标准化过程中扮演深具影响力的角色
+* Boost提供许多TR1组件实现品，以及其他许多程序库
 
 
 #### [返回顶部](#head)
