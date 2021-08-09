@@ -9,17 +9,17 @@
  * ConcreteColleague: 具体同事类
  */
 
-class Colleague;
+class Colleague ;
 
 class Mediator {
 public:
     virtual void operation(int) {
 
     }
-
-    void register(Colleague* c) {
-        this->_cplleague = c;
+    void registert(Colleague* c) {
+        this->_colleague = c;
     }
+
 protected:
     Colleague* _colleague;
 };
@@ -37,7 +37,6 @@ public:
 class ConcreteMediator : public Mediator {
 public:
     void operation(int) {
-        _colleague.s
     }
 };
 
@@ -61,3 +60,6 @@ private:
     Mediator* _mediator;
 };
 
+int main() {
+    return 0;
+}
