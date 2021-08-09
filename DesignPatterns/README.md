@@ -1,6 +1,6 @@
 ## 设计模式
 
-####六大基本原则
+#### 六大基本原则
 1. Single Responsibility Principle：单一职责原则
 2. Open Closed Principle：开闭原则
 3. Liskov Substitution Principle：里氏替换原则
